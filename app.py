@@ -69,16 +69,11 @@ def get_attractions(page: int = Query(0, ge=0), keyword: Optional[str] = Query(N
         if keyword:
             query = ("""
                 SELECT * FROM attractions 
-                WHERE name LIKE %s OR category LIKE %s 
-                OR description LIKE %s OR address LIKE %s 
-                OR transport LIKE %s OR mrt LIKE %s
+                WHERE name LIKE %s OR mrt LIKE %s
                 LIMIT %s OFFSET %s
             """)
             cursor.execute(query, (
-                f"%{keyword}%", f"%{keyword}%", 
-                f"%{keyword}%", f"%{keyword}%", 
-                f"%{keyword}%", f"%{keyword}%", 
-                limit, offset))
+                f"%{keyword}%", f"%{keyword}%", limit, offset))
         else:
             query = "SELECT * FROM attractions LIMIT %s OFFSET %s"
             cursor.execute(query, (limit, offset))
