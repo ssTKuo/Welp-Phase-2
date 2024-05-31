@@ -93,12 +93,12 @@ def get_attractions(page: int = Query(0, ge=0), keyword: Optional[str] = Query(N
                 "id": row['id'],
                 "name": row['name'],
                 "category": row['category'],
-                "mrt": row.get('mrt'),
                 "description": row['description'],
                 "address": row['address'],
                 "transport": row['transport'],
-                "latitude": row['latitude'],
-                "longitude": row['longitude'],
+                "mrt": row.get('mrt'),             
+                "lat": row['latitude'],
+                "lng": row['longitude'],
                 "images": images
             }
             attractions.append(attraction)
