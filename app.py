@@ -99,7 +99,9 @@ def get_attractions(page: int = Query(0, ge=0), keyword: Optional[str] = Query(N
             attractions.append(attraction)
 
         # 計算下一頁
-        next_page = page + 1 if offset + limit < total_results else None
+        next_page = None
+        if len(results) == limit:
+            next_page = page + 1
 
         return {"nextPage": next_page, "data": attractions}
 
