@@ -1,0 +1,433 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 54px;
+  background-color: white;
+
+  .navbar {
+    width: 100%;
+    max-width: 1200px;
+    height: 54px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .left {
+      font-family: "Noto Sans TC", sans-serif;
+      font-size: 30px;
+      font-weight: 700;
+      line-height: 34px;
+      color: #448899;
+      padding-left: 10px;
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-right: 10px;
+
+      #booking-link,
+      #signin-button {
+        font-family: "Noto Sans TC", sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 13.3px;
+        color: #666666;
+        text-decoration: none;
+        padding: 10px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+      }
+
+      #signin-button {
+        background: none;
+        border: none;
+      }
+    }
+  }
+}
+
+section.hero {
+  background-image: url("../data/welcome.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  width: 100%;
+  max-width: 1920px;
+  height: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+
+  .solgon {
+    width: 100%;
+    max-width: 1200px;
+    height: 169px;
+    padding: 10px;
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .solgon_div {
+      width: 100%;
+      max-width: 1180px;
+      height: 149px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      .solgon_div_solgon {
+        width: 100%;
+        max-width: 1180px;
+        height: 78px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .slogan-h1 {
+          font-family: "Noto Sans TC", sans-serif;
+          font-weight: 700;
+          font-size: 28px;
+          color: #f8f8f8;
+          width: 100%;
+          max-width: 1180px;
+          height: 41px;
+          text-shadow: 0px 0px 30px #aabbcc;
+          display: flex;
+          align-items: center;
+        }
+
+        .subtitle-p {
+          font-family: "Noto Sans TC", sans-serif;
+          font-weight: 700;
+          font-size: 16px;
+          color: #f8f8f8;
+          width: 100%;
+          max-width: 1180px;
+          height: 22px;
+          display: flex;
+          align-items: center;
+        }
+      }
+
+      .search-bar {
+        width: 100%;
+        max-width: 1180px;
+        height: 46px;
+        display: flex;
+        align-items: center;
+        position: relative;
+
+        .search-barinside {
+          width: 100%;
+          max-width: 460px;
+          height: 46px;
+          display: flex;
+          align-items: center;
+          position: relative;
+
+          #search-input {
+            width: 100%;
+            max-width: 400px;
+            height: 46px;
+            color: #aabbcc;
+            background-color: white;
+            border: none;
+            border-top-left-radius: 4px;
+            border-bottom-left-radius: 4px;
+            padding: 0 10px;
+            box-sizing: border-box;
+            font-family: "Noto Sans TC", sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 46px;
+            position: relative;
+
+            &::placeholder {
+              font-family: "Noto Sans TC", sans-serif;
+              font-weight: 700;
+              font-size: 16px;
+              color: #757575;
+            }
+          }
+
+          #search-button {
+            width: 60px;
+            height: 46px;
+            background-color: #448899;
+            border: none;
+            border-top-right-radius: 4px;
+            border-bottom-right-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            z-index: 1;
+            position: relative;
+
+            img {
+              background: none;
+              pointer-events: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+section.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+
+  .listbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    max-width: 1200px;
+    height: 70px;
+    padding: 0px 0px 20px 0px;
+    overflow: hidden;
+
+    .left_container {
+      position: relative;
+      width: 47px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end; // 调整为右对齐
+
+      .arrow.left-arrow {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+
+    .right_container {
+      position: relative;
+      width: 47px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; // 调整为左对齐
+
+      .arrow.right-arrow {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+
+    .listbar {
+      width: calc(100% - 94px); // 减去两侧按钮容器的宽度
+      height: 50px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+
+      .listbar-inner {
+        display: flex;
+        transition: transform 0.5s ease;
+        width: 100%;
+
+        .station {
+          flex: 1;
+          text-align: center;
+          padding: 5px 15px;
+          white-space: nowrap;
+          font-family: "Noto Sans TC", sans-serif;
+          font-weight: 500;
+          font-size: 16px;
+          line-height: 13.3px;
+          color: rgba(102, 102, 102, 1);
+          margin: 0 4px;
+        }
+      }
+    }
+
+    .arrow {
+      background-color: transparent;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      img {
+        width: 100%;
+        height: auto;
+        opacity: 0.5;
+        transition: opacity 0.3s; // 添加过渡效果
+      }
+
+      img:hover {
+        opacity: 1;
+      }
+    }
+  }
+
+  #attractions {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+
+    #attractions_group {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 20px;
+      width: 100%;
+      justify-items: center; // 确保 .attraction 元素在 grid 中居中对齐
+    }
+
+    #desktop_attraction {
+      position: relative;
+      width: 270px;
+      height: 242px;
+      border: 1px solid #e8e8e8;
+      border-radius: 5px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; // 确保图片靠上对齐
+      align-items: center;
+      margin: 0 auto; // 使 .attraction 在 grid 单元格中居中
+
+      img {
+        width: 270px;
+        height: 197px;
+        align-self: flex-start; // 确保图片靠上对齐
+      }
+
+      .name_outline {
+        position: absolute;
+        bottom: 45px;
+        text-align: left;
+        width: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        color: #ffffff;
+        padding: 5px 10px;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+
+        .name {
+          font-family: "Noto Sans TC", sans-serif;
+          font-size: 16px;
+          font-weight: 700;
+          line-height: 1.5;
+          text-align: left;
+          color: #ffffff;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .mrtandcategory_outline {
+        display: flex;
+        justify-content: space-between;
+        width: 270px;
+        height: 45px;
+        padding: 10px;
+        box-sizing: border-box;
+        position: absolute;
+        bottom: 0;
+        background: #ffffff;
+
+        .mrtandcategory {
+          width: auto;
+          font-family: "Noto Sans TC", sans-serif;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 1.5;
+          color: #757575;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #757575;
+  width: 100%;
+  max-width: 1920px;
+  height: 104px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-family: Noto Sans TC;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 13.3px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// 添加媒体查询，确保在不同屏幕尺寸下的样式
+@media (min-width: 600px) and (max-width: 1200px) {
+  #attractions_group {
+    grid-template-columns: repeat(3, minmax(270px, 1fr));
+    justify-content: center;
+  }
+}
+
+/* 调整attractions的样式，使其在小尺寸螢幕下每行顯示1塊 */
+@media (min-width: 360px) and (max-width: 600px) {
+  #attractions_group {
+    grid-template-columns: repeat(1, minmax(270px, 1fr));
+    justify-content: center;
+  }
+}

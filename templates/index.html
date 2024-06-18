@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>台北一日遊</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/style.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <header>
+      <section class="navbar">
+        <section class="left">
+          <div class="headertext">台北一日遊</div>
+        </section>
+        <section class="right">
+          <a href="booking.html" id="booking-link">預定行程</a>
+          <button id="signin-button">登入/註冊</button>
+        </section>
+      </section>
+    </header>
+    <!-- searcharea -->
+    <section class="hero">
+      <div class="solgon">
+        <div class="solgon_div">
+          <div class="solgon_div_solgon">
+            <h1 class="slogan-h1">輕鬆享受台北一日悠閒</h1>
+            <p class="subtitle-p">探索每個角落，體驗城市的深度旅遊行程</p>
+          </div>
+          <div class="search-bar">
+            <div class="search-barinside">
+              <input
+                type="text"
+                placeholder="輸入景點名稱查詢"
+                id="search-input"
+              />
+              <button title="search-query" type="submit" id="search-button">
+                <img
+                  width="30px"
+                  height="30px"
+                  src="/data/icon_search.png"
+                  alt="search-icon"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- main -->
+    <section class="container" id="container">
+      <div class="listbar-container">
+        <div class="left_container">
+          <button class="arrow left-arrow" onclick="scrollLeft()">
+            <img src="/data/arrowleft.png" alt="left arrow" />
+          </button>
+        </div>
+        <div class="listbar">
+          <div class="listbar-inner" id="mrt-stations">
+            <!-- MRT名稱列表將由JavaScript動態插入 -->
+          </div>
+        </div>
+        <div class="right_container">
+          <button class="arrow right-arrow" onclick="scrollRight()">
+            <img src="/data/arrowright.png" alt="right arrow" />
+          </button>
+        </div>
+      </div>
+
+      <!-- 新增景點列表容器 -->
+      <div id="attractions">
+        <div id="attractions_group">
+          <!-- 景點列表將由JavaScript動態插入 -->
+        </div>
+      </div>
+    </section>
+    <!-- footer -->
+    <footer class="footer">
+      <div>COPYRIGHT © 2024 台北一日遊</div>
+    </footer>
+    <script src="/styles/script.js"></script>
+  </body>
+</html>

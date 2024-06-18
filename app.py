@@ -1,16 +1,20 @@
-# HTTPException，來自 fastapi 模組，用於在 API 路由中引發 HTTP 錯誤。當發生錯誤時，您可以使用 HTTPException 返回特定的 HTTP 狀態碼和錯誤信息。
-# Query，來自 fastapi 模組，用於處理查詢參數。它允許您設置查詢參數的默認值、數據類型和驗證條件。例如，page: int = Query(0, ge=0) 設置 page 參數的默認值為 0，且該參數必須大於或等於 0。
-# List 和 Optional，來自 typing 模組，用於類型註釋。List 表示列表類型，Optional 表示參數是可選的，可以是某種類型或 None。
-# logging 是 Python 標準庫中的一個模組，用於記錄應用程式運行過程中的日誌信息。日誌可以幫助開發人員了解應用程式的運行狀況，發現和排查錯誤。
-# Path 用於定義路徑參數的驗證。
 from fastapi import FastAPI, HTTPException, Query, Request
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from typing import Optional
 import mysql.connector
 
+app = FastAPI()
 
+# 配置静态文件目录
+app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/data", StaticFiles(directory="data"), name="data")
+app.mount("/styles", StaticFiles(directory="styles"), name="styles")
 
-app=FastAPI()
+# 新增 Jinja2 模板配置
+templates = Jinja2Templates(directory="templates")
+
 # 資料庫連接配置
 db_config = {
     'user': 'root',
@@ -19,22 +23,24 @@ db_config = {
     'database': 'taipei_attractions'
 }
 
-
-# Static Pages (Never Modify Code in this Block)
+# 靜態頁面路由
 @app.get("/", include_in_schema=False)
 async def index(request: Request):
-	return FileResponse("./static/index.html", media_type="text/html")
+    return templates.TemplateResponse("index.html", {"request": request})
+
 @app.get("/attraction/{id}", include_in_schema=False)
 async def attraction(request: Request, id: int):
-	return FileResponse("./static/attraction.html", media_type="text/html")
+    return FileResponse("./static/attraction.html", media_type="text/html")
+
 @app.get("/booking", include_in_schema=False)
 async def booking(request: Request):
-	return FileResponse("./static/booking.html", media_type="text/html")
+    return FileResponse("./static/booking.html", media_type="text/html")
+
 @app.get("/thankyou", include_in_schema=False)
 async def thankyou(request: Request):
-	return FileResponse("./static/thankyou.html", media_type="text/html")
+    return FileResponse("./static/thankyou.html", media_type="text/html")
 
-#新增的Attraction API (取得景點資料表)
+# 新增的Attraction API (取得景點資料表)
 @app.get("/api/attractions")
 def get_attractions(page: int = Query(0, ge=0), keyword: Optional[str] = Query(None)):
     try:
@@ -48,12 +54,12 @@ def get_attractions(page: int = Query(0, ge=0), keyword: Optional[str] = Query(N
 
         # 計算符合條件的資料總數
         if keyword:
-            count_query = ("""
+            count_query = """
                 SELECT COUNT(*) as total FROM attractions 
                 WHERE name LIKE %s OR category LIKE %s 
                 OR description LIKE %s OR address LIKE %s 
                 OR transport LIKE %s OR mrt LIKE %s
-            """)
+            """
             cursor.execute(count_query, (
                 f"%{keyword}%", f"%{keyword}%", 
                 f"%{keyword}%", f"%{keyword}%", 
@@ -67,11 +73,11 @@ def get_attractions(page: int = Query(0, ge=0), keyword: Optional[str] = Query(N
 
         # 查詢語句
         if keyword:
-            query = ("""
+            query = """
                 SELECT * FROM attractions 
                 WHERE name LIKE %s OR mrt LIKE %s
                 LIMIT %s OFFSET %s
-            """)
+            """
             cursor.execute(query, (
                 f"%{keyword}%", f"%{keyword}%", limit, offset))
         else:
@@ -105,13 +111,13 @@ def get_attractions(page: int = Query(0, ge=0), keyword: Optional[str] = Query(N
 
         return {"nextPage": next_page, "data": attractions}
 
-    except mysql.connector.Error:
-        raise HTTPException(status_code=500, detail="Database connection error")
+    except mysql.connector.Error as e:
+        raise HTTPException(status_code=500, detail=f"Database connection error: {e}")
     finally:
         cursor.close()
         conn.close()
         
-#新增的Attraction API (根據景點編號取得景點資料)
+# 新增的Attraction API (根據景點編號取得景點資料)
 @app.get("/api/attraction/{attractionId}")
 def get_attraction(attractionId: int):
     try:
@@ -132,15 +138,14 @@ def get_attraction(attractionId: int):
 
         return {"data": attraction}
 
-    except mysql.connector.Error as err:
-        print(f"Database Error: {err}")
-        raise HTTPException(status_code=500, detail="伺服器內部錯誤。")
+    except mysql.connector.Error as e:
+        raise HTTPException(status_code=500, detail=f"伺服器內部錯誤: {e}")
 
     finally:
         cursor.close()
         conn.close()
 
-#新增的MRT Station API (取得捷運站名稱列表)
+# 新增的MRT Station API (取得捷運站名稱列表)
 @app.get("/api/mrts")
 def get_mrt_stations():
     try:
@@ -164,8 +169,8 @@ def get_mrt_stations():
 
         return {"data": mrt_stations}
 
-    except mysql.connector.Error as err:
-        raise HTTPException(status_code=500, detail="Database connection error")
+    except mysql.connector.Error as e:
+        raise HTTPException(status_code=500, detail=f"Database connection error: {e}")
     finally:
         cursor.close()
-        conn.close()       
+        conn.close()
